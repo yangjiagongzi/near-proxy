@@ -1,0 +1,183 @@
+import { createThemeContract, createTheme } from "@vanilla-extract/css";
+
+export const themeVars = createThemeContract({
+  colors: {
+    white: null,
+    black: null,
+    transparentBlack: null,
+    primary: null,
+    primaryOpacity: null,
+    active: null,
+    activeOpacity: null,
+    green: null,
+    red: null,
+    yellow: null,
+    orange: null,
+    purple: null,
+    teal: null,
+    textUltraLight: null,
+    textLight: null,
+    textMedium: null,
+    textDark: null,
+    primaryBackground: null,
+    secondaryBackground: null,
+    card: null,
+    orangeLight: null,
+    redLight: null,
+    greenLight: null,
+    divider: null,
+    background: null,
+    statusBarColor: null,
+  },
+  fontSizes: {
+    extraExtraLarge: null,
+    extraLarge: null,
+    large: null,
+    medium: null,
+    small: null,
+    extraSmall: null,
+    extraExtraSmall: null,
+  },
+  spacing: {
+    xxsmall: null,
+    xsmall: null,
+    small: null,
+    medium: null,
+    large: null,
+    xlarge: null,
+    guttersmall: null,
+    gutter: null,
+    header: null,
+    footer: null,
+    maxWidth: null,
+    headerTop: null,
+    xxsWidth: null,
+    xsWidth: null,
+    width: null,
+    lWidth: null,
+    xlWidth: null,
+    xxlWidth: null,
+  },
+  shadow: null,
+  borderRadius: null,
+  labelBackgroundOpacity: null,
+});
+
+const BaseColors = {
+  white: "#ffffff",
+  black: "#000000",
+  transparentBlack: "rgba(0,0,0,0.4)",
+} as const;
+
+const Fonts = {
+  extraExtraLarge: "40px",
+  extraLarge: "36px",
+  large: "24px",
+  medium: "20px",
+  small: "16px",
+  extraSmall: "14px",
+  extraExtraSmall: "12px",
+} as const;
+
+const Spacing = {
+  xxsmall: "4px",
+  xsmall: "8px",
+  small: "12px",
+  medium: "20px",
+  large: "24px",
+  xlarge: "40px",
+  guttersmall: "50px",
+  gutter: "80px",
+  header: "10px",
+  footer: "0px",
+  maxWidth: "700px",
+  headerTop: "25px",
+  xxsWidth: "50px",
+  xsWidth: "100px",
+  width: "200px",
+  lWidth: "300px",
+  xlWidth: "400px",
+  xxlWidth: "500px",
+} as const;
+
+const Shadow =
+  "0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12)";
+
+const BorderRadius = "10px";
+
+const LabelBackgroundOpacity = "0.2";
+
+export const lightTheme = createTheme(themeVars, {
+  colors: {
+    ...BaseColors,
+    primary: "#136aee",
+    primaryOpacity: "rgba(19, 106, 238, 0.5)",
+    active: "#1de9b6",
+    activeOpacity: "rgba(29, 233, 182, 0.5)",
+    green: "#31d76e",
+    red: "#ff485f",
+    yellow: "#ffd41a",
+    orange: "#ffa115",
+    purple: "#755cf2",
+    teal: "#59dce4",
+    textUltraLight: "#CECECE",
+    textLight: "#999999",
+    textMedium: "#666666",
+    textDark: "#000001",
+    primaryBackground: "#fffffe",
+    secondaryBackground: "#f6f9fc",
+    card: "#fffefe",
+    orangeLight: "#FFF5E6",
+    redLight: "#fff2f4",
+    greenLight: "#E5FAED",
+    divider: "#ebebeb",
+    background: "#fffffe",
+    statusBarColor: "#1641d6",
+  },
+  fontSizes: Fonts,
+  spacing: Spacing,
+  shadow: Shadow,
+  borderRadius: BorderRadius,
+  labelBackgroundOpacity: LabelBackgroundOpacity,
+});
+
+export const darkTheme = createTheme(themeVars, {
+  colors: {
+    ...BaseColors,
+    primary: "#2D7EF7",
+    primaryOpacity: "rgba(45, 126, 247, 0.5)",
+    active: "#1de9b6",
+    activeOpacity: "rgba(29, 233, 182, 0.5)",
+    green: "#51DD84",
+    red: "#FD6478",
+    yellow: "#FFDB3D",
+    orange: "#FEAF39",
+    purple: "#9582F5",
+    teal: "#7FE4EA",
+    textUltraLight: "#666666",
+    textLight: "#999999",
+    textMedium: "#CECECE",
+    textDark: "#FFFFFF",
+    primaryBackground: "#171717",
+    secondaryBackground: "#262626",
+    card: "#252525",
+    orangeLight: "#423627",
+    redLight: "#2F2123",
+    greenLight: "#2B2E2C",
+    divider: "#323233",
+    background: "#121212",
+    statusBarColor: "#1641d6",
+  },
+  fontSizes: Fonts,
+  spacing: Spacing,
+  shadow: Shadow,
+  borderRadius: BorderRadius,
+  labelBackgroundOpacity: LabelBackgroundOpacity,
+});
+
+export const themeClassMap = {
+  light: lightTheme,
+  dark: darkTheme,
+} as const;
+
+export type ThemeMode = keyof typeof themeClassMap;
