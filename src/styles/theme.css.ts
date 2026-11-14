@@ -179,5 +179,3 @@ export const themeClassMap = {
   light: lightTheme,
   dark: darkTheme,
 } as const;
-
-export type ThemeMode = keyof typeof themeClassMap;

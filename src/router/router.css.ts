@@ -2,28 +2,28 @@ import { style } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
 import { themeVars } from "~/styles/theme.css";
 
-export const router = style({
+const router = style({
   width: "100%",
   height: "100%",
   display: "flex",
   position: "relative",
 });
 
-export const navBar = style({
+const navBar = style({
   height: "100%",
   display: "flex",
   flexDirection: "column",
   background: themeVars.colors.secondaryBackground,
 });
 
-export const content = style({
+const content = style({
   width: "100%",
   height: "100%",
   flex: "1",
   background: themeVars.colors.primaryBackground,
 });
 
-export const navBarItem = recipe({
+const navBarItem = recipe({
   base: {
     width: 48,
     height: 48,
@@ -47,7 +47,7 @@ export const navBarItem = recipe({
   },
 });
 
-export const note = style({
+const note = style({
   display: "none",
   position: "absolute",
   left: 50,
@@ -58,9 +58,18 @@ export const note = style({
   zIndex: 100,
   color: themeVars.colors.textDark,
   background: themeVars.colors.primaryBackground,
+  borderRadius: 4,
   selectors: {
     [`${navBarItem.classNames.base}:hover &`]: {
       display: "block",
     },
   },
 });
+
+export default {
+  router,
+  navBar,
+  content,
+  navBarItem,
+  note,
+};

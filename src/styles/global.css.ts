@@ -18,6 +18,7 @@ globalStyle("#root", {
   margin: 0,
   background: "#171717",
   whiteSpace: "nowrap",
+  WebkitUserSelect: "none",
 });
 
 globalStyle("::-webkit-scrollbar", {
