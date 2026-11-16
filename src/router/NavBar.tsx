@@ -2,8 +2,8 @@ import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Icon, { IconName } from "~/components/Icon";
 import { RouteConfigs, RoutePaths } from "~/constant/route";
-import { navBar, navBarItem, note } from "./router.css";
 import { themeVars } from "~/styles/theme.css";
+import styles from "./router.css";
 
 type NavBarItemProps = {
   routePath: Values<typeof RoutePaths>;
@@ -28,16 +28,19 @@ const NavBarItem: React.FC<NavBarItemProps> = ({
     : themeVars.colors.textDark.toString();
 
   return (
-    <div className={navBarItem({ active })} onClick={() => navigate(routePath)}>
+    <div
+      className={styles.navBarItem({ active })}
+      onClick={() => navigate(routePath)}
+    >
       <Icon name={icon} size={"md"} color={iconColor} />
-      <div className={note}>{title}</div>
+      <div className={styles.note}>{title}</div>
     </div>
   );
 };
 
 const NavBar: React.FC = () => {
   return (
-    <div className={navBar}>
+    <div className={styles.navBar}>
       {RouteConfigs.map((r, idx) => {
         if (r.type === "Divider") {
           return (

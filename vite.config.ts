@@ -3,6 +3,7 @@ import react from "@vitejs/plugin-react";
 import process from "node:process";
 import path from "path";
 import { defineConfig } from "vite";
+import { createRelayPlugin } from "vite-plugin-relay";
 import svgr from "vite-plugin-svgr";
 
 const host = process.env.TAURI_DEV_HOST;
@@ -15,6 +16,10 @@ export default defineConfig(() => ({
       svgrOptions: {
         replaceAttrValues: { "#000": "currentColor" },
       },
+    }),
+    createRelayPlugin({
+      eagerEsModules: true,
+      artifactDirectory: "./src/__generated__",
     }),
   ],
   resolve: {

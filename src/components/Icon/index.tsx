@@ -8,6 +8,8 @@ import Intruder from "~/assets/svg/intruder.svg?react";
 import Note from "~/assets/svg/note.svg?react";
 import Output from "~/assets/svg/output.svg?react";
 import Project from "~/assets/svg/project.svg?react";
+import Proxy from "~/assets/svg/proxy.svg?react";
+import Repeater from "~/assets/svg/repeater.svg?react";
 import Settings from "~/assets/svg/settings.svg?react";
 import Tool from "~/assets/svg/tool.svg?react";
 
@@ -17,12 +19,14 @@ const IconMap = {
   Decoder,
   Dictionary: Dict,
   Home,
-  Intruder,
+  Repeater,
   Note,
   Output,
   Project,
   Settings,
   Tool,
+  Proxy,
+  Intruder,
 } as const;
 
 const SVGSizes = {

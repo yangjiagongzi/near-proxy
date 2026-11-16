@@ -1,7 +1,7 @@
 import React from "react";
-import { notification } from "./styles.css";
+import styles from "./styles.css";
 
-type Props = {};
+type Props = Record<string, never>;
 
 type State = {
   text: string;
@@ -50,7 +50,7 @@ class Notification extends React.Component<Props, State> {
     if (!text) {
       return null;
     }
-    return <div className={notification({ error })}>{text}</div>;
+    return <div className={styles.notification({ error })}>{text}</div>;
   }
 }
 

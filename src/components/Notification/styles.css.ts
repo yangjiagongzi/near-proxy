@@ -7,11 +7,11 @@ const notificationPop = keyframes({
     top: 0,
   },
   to: {
-    top: `-${themeVars.spacing.gutter}px`,
+    top: `calc(${themeVars.spacing.gutter} * -1)`,
   },
 });
 
-export const notification = recipe({
+const notification = recipe({
   base: {
     position: "absolute",
     right: `${themeVars.spacing.xlarge}`,
@@ -19,6 +19,7 @@ export const notification = recipe({
     borderRadius: 5,
     animation: `${notificationPop} 0.3s ease-out 1`,
     animationFillMode: "forwards",
+    zIndex: 100000,
   },
   variants: {
     error: {
@@ -34,3 +35,7 @@ export const notification = recipe({
     error: false,
   },
 });
+
+export default {
+  notification,
+};

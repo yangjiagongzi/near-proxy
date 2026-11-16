@@ -1,0 +1,104 @@
+type AppConfig {
+	id: ID!
+	themeMode: ThemeMode!
+	notification: Boolean!
+}
+
+input AppConfigInput {
+	themeMode: ThemeMode!
+	notification: Boolean!
+}
+
+type HeaderParamsItem {
+	id: String!
+	key: String!
+	value: String!
+	enable: Boolean!
+}
+
+input HeaderParamsItemInput {
+	id: String!
+	key: String!
+	value: String!
+	enable: Boolean!
+}
+
+enum HttpMethod {
+	CONNECT
+	OPTIONS
+	TRACE
+	HEAD
+	GET
+	POST
+	PUT
+	PATCH
+	DELETE
+}
+
+type MutationRoot {
+	updateAppConfig(input: AppConfigInput!): AppConfig!
+	updateProxyConfig(input: ProxyConfigInput!): ProxyConfig!
+	updateRepeaterConfig(input: RepeaterConfigInput!): RepeaterConfig!
+}
+
+type ProxyConfig {
+	id: ID!
+	listenHost: String!
+	listenPort: Int!
+	enableSsl: Boolean!
+	upstreamProxy: String!
+	interceptRequest: Boolean!
+	interceptResponse: Boolean!
+}
+
+input ProxyConfigInput {
+	listenHost: String!
+	listenPort: Int!
+	enableSsl: Boolean!
+	upstreamProxy: String!
+	interceptRequest: Boolean!
+	interceptResponse: Boolean!
+}
+
+type QueryRoot {
+	appConfig: AppConfig!
+	proxyConfig: ProxyConfig!
+	repeaterConfig: RepeaterConfig!
+}
+
+type RepeaterConfig {
+	id: ID!
+	method: HttpMethod!
+	url: String!
+	headers: [HeaderParamsItem!]!
+	params: [HeaderParamsItem!]!
+	body: String!
+	response: String!
+}
+
+input RepeaterConfigInput {
+	method: HttpMethod!
+	url: String!
+	headers: [HeaderParamsItemInput!]!
+	params: [HeaderParamsItemInput!]!
+	body: String!
+}
+
+enum ThemeMode {
+	dark
+	light
+	system
+}
+
+"""
+Directs the executor to include this field or fragment only when the `if` argument is true.
+"""
+directive @include(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
+"""
+Directs the executor to skip this field or fragment when the `if` argument is true.
+"""
+directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
+schema {
+	query: QueryRoot
+	mutation: MutationRoot
+}
