@@ -1,9 +1,9 @@
 use super::{HeaderParamsItemInput, HttpMethod};
-use async_graphql::*;
+use async_graphql::InputObject;
 use std::collections::HashMap;
 
 #[derive(InputObject)]
-pub struct RepeaterConfigInput {
+pub(in super::super) struct RepeaterConfigInput {
     pub method: HttpMethod,
     pub url: String,
     pub headers: Vec<HeaderParamsItemInput>,
@@ -12,7 +12,7 @@ pub struct RepeaterConfigInput {
 }
 
 impl RepeaterConfigInput {
-    pub fn to_hash_map(&self) -> HashMap<String, Option<String>> {
+    pub(in super::super) fn to_hash_map(&self) -> HashMap<String, Option<String>> {
         let mut map = HashMap::new();
         map.insert("method".to_string(), Some(self.method.as_str().to_string()));
         map.insert("url".to_string(), Some(self.url.clone()));

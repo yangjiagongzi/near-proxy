@@ -3,5 +3,7 @@ mod resolver;
 mod schema;
 mod types;
 
-pub use resolver::{GraphqlInput, GraphqlResponse, graphql_request};
-pub use schema::{AppSchema, SchemaState, export_schema_sdl, get_schema};
+pub(crate) use resolver::{GraphqlInput, GraphqlResponse, graphql_request};
+use schema::AppSchema;
+pub use schema::export_schema_sdl;
+pub(crate) use schema::{SchemaState, get_schema};

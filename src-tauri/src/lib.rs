@@ -1,3 +1,19 @@
+#![warn(
+    missing_debug_implementations,
+    rust_2018_idioms,
+    unreachable_pub,
+    unused_crate_dependencies,
+    unsafe_op_in_unsafe_fn
+)]
+#![warn(clippy::all, clippy::pedantic)]
+#![allow(
+    clippy::must_use_candidate,
+    clippy::return_self_not_must_use,
+    clippy::module_name_repetitions,
+    clippy::no_effect_underscore_binding,
+    clippy::unused_self
+)]
+
 mod database;
 mod entity;
 mod graphql;
@@ -26,6 +42,10 @@ async fn graphql_execute(
     graphql::graphql_request(db.inner().clone(), schema_state.0.clone(), input).await
 }
 
+/// rust启动入口
+///
+/// # Panics
+/// Initialization failed
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
@@ -33,7 +53,7 @@ pub fn run() {
             let handle = app.handle().clone();
             tauri::async_runtime::spawn(async move {
                 match startup_init(handle).await {
-                    Ok(_) => {
+                    Ok(()) => {
                         APP_READY.store(true, Ordering::Release);
                         println!("Initialization completed!");
                     }

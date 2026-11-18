@@ -1,16 +1,16 @@
 use crate::graphql::types::{ProxyConfig, ProxyConfigInput};
 use crate::repo::config_repo;
-use async_graphql::*;
+use async_graphql::Result;
 use sea_orm::DatabaseConnection;
 
 const CONFIGTYPE: &str = "proxy";
 
-pub async fn get_proxy_config(db: &DatabaseConnection) -> Result<ProxyConfig> {
+pub(in super::super) async fn get_proxy_config(db: &DatabaseConnection) -> Result<ProxyConfig> {
     let list = config_repo::find_all_by_type(db, CONFIGTYPE).await?;
     Ok(ProxyConfig::from_items(list))
 }
 
-pub async fn update_proxy_config(
+pub(in super::super) async fn update_proxy_config(
     db: &DatabaseConnection,
     input: ProxyConfigInput,
 ) -> Result<ProxyConfig> {

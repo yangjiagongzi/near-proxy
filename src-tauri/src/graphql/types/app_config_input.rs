@@ -1,15 +1,15 @@
 use super::ThemeMode;
-use async_graphql::*;
+use async_graphql::InputObject;
 use std::collections::HashMap;
 
 #[derive(InputObject)]
-pub struct AppConfigInput {
+pub(in super::super) struct AppConfigInput {
     pub theme_mode: ThemeMode,
     pub notification: bool,
 }
 
 impl AppConfigInput {
-    pub fn to_hash_map(&self) -> HashMap<String, Option<String>> {
+    pub(in super::super) fn to_hash_map(&self) -> HashMap<String, Option<String>> {
         let mut map = HashMap::new();
         map.insert(
             "theme_mode".to_string(),

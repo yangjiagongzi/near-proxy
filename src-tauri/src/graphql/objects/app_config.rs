@@ -1,14 +1,14 @@
 use crate::graphql::types::{AppConfig, AppConfigInput};
 use crate::repo::app_repo;
-use async_graphql::*;
+use async_graphql::Result;
 use sea_orm::DatabaseConnection;
 
-pub async fn get_app_config(db: &DatabaseConnection) -> Result<AppConfig> {
+pub(in super::super) async fn get_app_config(db: &DatabaseConnection) -> Result<AppConfig> {
     let list = app_repo::find_all(db).await?;
     Ok(AppConfig::from_items(list))
 }
 
-pub async fn update_app_config(
+pub(in super::super) async fn update_app_config(
     db: &DatabaseConnection,
     input: AppConfigInput,
 ) -> Result<AppConfig> {

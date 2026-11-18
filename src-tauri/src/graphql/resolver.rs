@@ -4,7 +4,7 @@ use async_graphql::{Value as GqlValue, Variables};
 use serde::Serialize;
 use serde_json::Value;
 
-pub async fn graphql_request(
+pub(crate) async fn graphql_request(
     db: DbState,
     schema: AppSchema,
     input: GraphqlInput,
@@ -45,7 +45,7 @@ pub async fn graphql_request(
 }
 
 #[derive(serde::Deserialize, Debug)]
-pub struct GraphqlInput {
+pub(crate) struct GraphqlInput {
     pub query: String,
     pub variables: serde_json::Value,
     #[serde(default)]
@@ -53,7 +53,7 @@ pub struct GraphqlInput {
 }
 
 #[derive(Serialize, Debug)]
-pub struct GraphqlResponse {
+pub(crate) struct GraphqlResponse {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub data: Option<Value>,
     #[serde(skip_serializing_if = "Option::is_none")]

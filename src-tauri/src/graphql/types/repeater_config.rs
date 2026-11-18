@@ -1,11 +1,11 @@
 use super::utils;
 use super::{HeaderParamsItem, HttpMethod};
 use crate::model::ConfigItem;
-use async_graphql::*;
+use async_graphql::{ID, Object};
 use std::collections::HashMap;
 use std::str::FromStr;
 
-pub struct RepeaterConfig {
+pub(in super::super) struct RepeaterConfig {
     pub method: HttpMethod,
     pub url: String,
     pub headers: Vec<HeaderParamsItem>,
@@ -40,7 +40,7 @@ impl RepeaterConfig {
 }
 
 impl RepeaterConfig {
-    pub fn from_items(list: Vec<ConfigItem>) -> Self {
+    pub(in super::super) fn from_items(list: Vec<ConfigItem>) -> Self {
         let map: HashMap<String, Option<String>> = list
             .into_iter()
             .map(|item| (item.key, item.value))

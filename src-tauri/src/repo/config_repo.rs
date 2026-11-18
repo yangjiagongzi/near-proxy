@@ -7,7 +7,7 @@ use sea_orm::{
 };
 use std::collections::HashMap;
 
-pub async fn find_all_by_type(
+pub(crate) async fn find_all_by_type(
     db: &DatabaseConnection,
     r#type: &str,
 ) -> Result<Vec<ConfigItem>, DbErr> {
@@ -21,7 +21,7 @@ pub async fn find_all_by_type(
     Ok(items)
 }
 
-pub async fn batch_upsert_by_type_key(
+pub(crate) async fn batch_upsert_by_type_key(
     db: &DatabaseConnection,
     r#type: &str,
     map: HashMap<String, Option<String>>,

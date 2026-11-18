@@ -1,3 +1,3 @@
-pub mod app_config;
-pub mod proxy_config;
-pub mod repeater_config;
+pub(super) mod app_config;
+pub(super) mod proxy_config;
+pub(super) mod repeater_config;

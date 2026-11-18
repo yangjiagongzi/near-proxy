@@ -1,7 +1,8 @@
-use async_graphql::*;
+#![allow(clippy::unused_async_trait_impl)]
+use async_graphql::Enum;
 use std::str::FromStr;
 
-#[derive(Enum, Copy, Clone, Eq, PartialEq, Debug)]
+#[derive(Enum, Copy, Clone, Eq, PartialEq, Debug, Default)]
 pub enum HttpMethod {
     #[graphql(name = "CONNECT")]
     Connect,
@@ -12,6 +13,7 @@ pub enum HttpMethod {
     #[graphql(name = "HEAD")]
     Head,
     #[graphql(name = "GET")]
+    #[default]
     Get,
     #[graphql(name = "POST")]
     Post,
@@ -52,14 +54,8 @@ impl FromStr for HttpMethod {
     }
 }
 
-impl Default for HttpMethod {
-    fn default() -> Self {
-        HttpMethod::Get
-    }
-}
-
 impl HttpMethod {
-    pub fn as_str(&self) -> &'static str {
+    pub fn as_str(self) -> &'static str {
         match self {
             HttpMethod::Connect => "CONNECT",
             HttpMethod::Options => "OPTIONS",

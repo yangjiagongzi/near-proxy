@@ -1,11 +1,11 @@
 use super::ThemeMode;
 use super::utils;
 use crate::model::AppItem;
-use async_graphql::*;
+use async_graphql::{ID, Object};
 use std::collections::HashMap;
 use std::str::FromStr;
 
-pub struct AppConfig {
+pub(in super::super) struct AppConfig {
     pub theme_mode: ThemeMode,
     pub notification: bool,
 }
@@ -24,7 +24,7 @@ impl AppConfig {
 }
 
 impl AppConfig {
-    pub fn from_items(list: Vec<AppItem>) -> Self {
+    pub(in super::super) fn from_items(list: Vec<AppItem>) -> Self {
         let map: HashMap<String, Option<String>> = list
             .into_iter()
             .map(|item| (item.key, item.value))

@@ -1,8 +1,8 @@
-use async_graphql::*;
+use async_graphql::InputObject;
 use serde::Serialize;
 
 #[derive(InputObject, Clone, Serialize)]
-pub struct HeaderParamsItemInput {
+pub(in super::super) struct HeaderParamsItemInput {
     pub id: String,
     pub key: String,
     pub value: String,

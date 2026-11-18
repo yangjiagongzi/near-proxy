@@ -1,13 +1,15 @@
-use async_graphql::*;
+#![allow(clippy::unused_async_trait_impl)]
+use async_graphql::Enum;
 use std::str::FromStr;
 
-#[derive(Enum, Copy, Clone, Eq, PartialEq, Debug)]
+#[derive(Enum, Copy, Clone, Eq, PartialEq, Debug, Default)]
 pub enum ThemeMode {
     #[graphql(name = "dark")]
     Dark,
     #[graphql(name = "light")]
     Light,
     #[graphql(name = "system")]
+    #[default]
     System,
 }
 
@@ -35,14 +37,8 @@ impl FromStr for ThemeMode {
     }
 }
 
-impl Default for ThemeMode {
-    fn default() -> Self {
-        ThemeMode::System
-    }
-}
-
 impl ThemeMode {
-    pub fn as_str(&self) -> &'static str {
+    pub fn as_str(self) -> &'static str {
         match self {
             ThemeMode::Dark => "dark",
             ThemeMode::Light => "light",

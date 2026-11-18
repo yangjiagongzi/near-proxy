@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct ConfigItem {
+pub(crate) struct ConfigItem {
     pub id: i64,
     pub r#type: String,
     pub key: String,

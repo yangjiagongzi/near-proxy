@@ -1,7 +1,8 @@
+#![allow(elided_lifetimes_in_paths)]
 use sea_orm_migration::prelude::*;
 
 #[derive(DeriveMigrationName)]
-pub struct Migration;
+struct Migration;
 
 #[async_trait::async_trait]
 impl MigrationTrait for Migration {
@@ -93,7 +94,7 @@ impl MigrationTrait for Migration {
     }
 }
 
-pub struct Migrator;
+pub(super) struct Migrator;
 
 #[async_trait::async_trait]
 impl MigratorTrait for Migrator {
@@ -103,7 +104,7 @@ impl MigratorTrait for Migrator {
 }
 
 #[derive(DeriveIden)]
-pub enum App {
+enum App {
     Table,
     Id,
     Key,
@@ -114,7 +115,7 @@ pub enum App {
 }
 
 #[derive(DeriveIden)]
-pub enum Config {
+enum Config {
     Table,
     Id,
     Type,

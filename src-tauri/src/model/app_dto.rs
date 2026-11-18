@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct AppItem {
+pub(crate) struct AppItem {
     pub id: i64,
     pub key: String,
     pub value: Option<String>,

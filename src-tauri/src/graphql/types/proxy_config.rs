@@ -1,9 +1,9 @@
 use super::utils;
 use crate::model::ConfigItem;
-use async_graphql::*;
+use async_graphql::{ID, Object};
 use std::collections::HashMap;
 
-pub struct ProxyConfig {
+pub(in super::super) struct ProxyConfig {
     pub listen_host: String,
     pub listen_port: u16,
     pub enable_ssl: bool,
@@ -38,7 +38,7 @@ impl ProxyConfig {
 }
 
 impl ProxyConfig {
-    pub fn from_items(list: Vec<ConfigItem>) -> Self {
+    pub(in super::super) fn from_items(list: Vec<ConfigItem>) -> Self {
         let map: HashMap<String, Option<String>> = list
             .into_iter()
             .map(|item| (item.key, item.value))

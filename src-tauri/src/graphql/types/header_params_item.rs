@@ -1,8 +1,8 @@
-use async_graphql::*;
+use async_graphql::SimpleObject;
 use serde::Deserialize;
 
 #[derive(SimpleObject, Clone, Deserialize)]
-pub struct HeaderParamsItem {
+pub(in super::super) struct HeaderParamsItem {
     pub id: String,
     pub key: String,
     pub value: String,

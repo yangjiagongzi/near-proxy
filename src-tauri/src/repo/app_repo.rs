@@ -6,7 +6,7 @@ use sea_orm::{
 };
 use std::collections::HashMap;
 
-pub async fn find_all(db: &DatabaseConnection) -> Result<Vec<AppItem>, DbErr> {
+pub(crate) async fn find_all(db: &DatabaseConnection) -> Result<Vec<AppItem>, DbErr> {
     let items = Entity::find()
         .filter(Column::IsDeleted.eq(0))
         .all(db)
@@ -17,7 +17,7 @@ pub async fn find_all(db: &DatabaseConnection) -> Result<Vec<AppItem>, DbErr> {
     Ok(items)
 }
 
-pub async fn batch_upsert_by_keys(
+pub(crate) async fn batch_upsert_by_keys(
     db: &DatabaseConnection,
     map: HashMap<String, Option<String>>,
 ) -> Result<Vec<AppItem>, DbErr> {

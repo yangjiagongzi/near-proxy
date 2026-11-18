@@ -5,9 +5,9 @@ use super::types::{
     AppConfig, AppConfigInput, ProxyConfig, ProxyConfigInput, RepeaterConfig, RepeaterConfigInput,
 };
 use crate::database::DbState;
-use async_graphql::*;
+use async_graphql::{Context, EmptySubscription, Object, Result, Schema};
 
-pub struct QueryRoot;
+pub(crate) struct QueryRoot;
 
 #[Object]
 impl QueryRoot {
@@ -28,11 +28,11 @@ impl QueryRoot {
     }
 }
 
-pub struct MutationRoot;
+pub(crate) struct MutationRoot;
 
 #[Object]
 impl MutationRoot {
-    pub async fn update_app_config(
+    async fn update_app_config(
         &self,
         ctx: &Context<'_>,
         input: AppConfigInput,
@@ -42,7 +42,7 @@ impl MutationRoot {
         Ok(cfg)
     }
 
-    pub async fn update_proxy_config(
+    async fn update_proxy_config(
         &self,
         ctx: &Context<'_>,
         input: ProxyConfigInput,
@@ -52,7 +52,7 @@ impl MutationRoot {
         Ok(cfg)
     }
 
-    pub async fn update_repeater_config(
+    async fn update_repeater_config(
         &self,
         ctx: &Context<'_>,
         input: RepeaterConfigInput,
@@ -63,16 +63,16 @@ impl MutationRoot {
     }
 }
 
-pub type AppSchema = Schema<QueryRoot, MutationRoot, EmptySubscription>;
+pub(crate) type AppSchema = Schema<QueryRoot, MutationRoot, EmptySubscription>;
 
 fn build_schema() -> AppSchema {
     Schema::build(QueryRoot, MutationRoot, EmptySubscription).finish()
 }
 
 #[derive(Clone)]
-pub struct SchemaState(pub AppSchema);
+pub(crate) struct SchemaState(pub(crate) AppSchema);
 
-pub fn get_schema() -> SchemaState {
+pub(crate) fn get_schema() -> SchemaState {
     SchemaState(build_schema())
 }
 
